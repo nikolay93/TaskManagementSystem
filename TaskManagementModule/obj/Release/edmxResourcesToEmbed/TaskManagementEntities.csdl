@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TaskManagementEntities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="TaskManagementEntitiesContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="TaskManagementEntities.Comment" />
+    <EntitySet Name="Tasks" EntityType="TaskManagementEntities.Task" />
+    <EntitySet Name="Users" EntityType="TaskManagementEntities.User" />
+    <AssociationSet Name="TaskComments" Association="TaskManagementEntities.TaskComments">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="TasksUsers" Association="TaskManagementEntities.TasksUsers">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EnumType Name="TaskType">
+    <Member Name="Development" Value="0" />
+    <Member Name="QA" Value="1" />
+    <Member Name="Design" Value="2" />
+  </EnumType>
+  <EnumType Name="TaskStatus">
+    <Member Name="Active" Value="0" />
+    <Member Name="Completed" Value="1" />
+    <Member Name="Cancelled" Value="2" />
+  </EnumType>
+  <EnumType Name="CommentType">
+    <Member Name="General" Value="0" />
+    <Member Name="Reminder" Value="1" />
+    <Member Name="Status" Value="2" />
+  </EnumType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateAdded" Type="DateTimeOffset" Nullable="false" Precision="7" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CommentType" Type="TaskManagementEntities.CommentType" Nullable="false" />
+    <Property Name="ReminderDate" Type="DateTimeOffset" Precision="7" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Task" Relationship="TaskManagementEntities.TaskComments" FromRole="Comment" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateDate" Type="DateTimeOffset" Nullable="false" Precision="7" />
+    <Property Name="TaskName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="RequiredByDate" Type="DateTimeOffset" Precision="7" />
+    <Property Name="TaskDescription" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+    <Property Name="TaskStatus" Type="TaskManagementEntities.TaskStatus" Nullable="false" />
+    <Property Name="TaskType" Type="TaskManagementEntities.TaskType" Nullable="false" />
+    <Property Name="NextActionDate" Type="DateTimeOffset" Precision="7" />
+    <NavigationProperty Name="Comments" Relationship="TaskManagementEntities.TaskComments" FromRole="Task" ToRole="Comment" />
+    <NavigationProperty Name="Users" Relationship="TaskManagementEntities.TasksUsers" FromRole="Task" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tasks" Relationship="TaskManagementEntities.TasksUsers" FromRole="User" ToRole="Task" />
+  </EntityType>
+  <Association Name="TaskComments">
+    <End Type="TaskManagementEntities.Task" Role="Task" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="TaskManagementEntities.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TasksUsers">
+    <End Type="TaskManagementEntities.Task" Role="Task" Multiplicity="*" />
+    <End Type="TaskManagementEntities.User" Role="User" Multiplicity="*" />
+  </Association>
+</Schema>

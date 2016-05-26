@@ -1,0 +1,58 @@
+﻿@model List<TaskManagementModule.Task>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tasks</h2>
+
+ @*Get form for searching tasks in a specific time period*@
+@using (Html.BeginForm("Index", "Tasks", FormMethod.Get))
+{
+    @Html.Label("Date from")
+    <input name="from" type="text" class="datepicker form-control" />
+    @Html.Label("Date to")
+    <input name="to" type="text" class="datepicker form-control" /><br />
+    <input type="submit" value="Search" class="btn btn-primary" />
+}
+<br />
+@Html.ActionLink("Create task", "Create")
+
+@*Tasks according to the specified time period*@
+<table class=" table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Create date</th>
+            <th>Required by</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+    <tbody>
+    @foreach (var task in Model)
+    {
+            <tr>
+                <td>@task.TaskName</td>
+                <td>@task.TaskDescription</td>
+                @{if (task.RequiredByDate < DateTimeOffset.Now)
+                    {
+                        <td>Due</td>
+                    }
+                    else { 
+                    <td>@task.TaskStatus</td>
+                    }
+                }
+                <td>@task.TaskType</td>
+                <td>@Convert.ToString(string.Format("{0:MM/dd/yyyy}", task.CreateDate))</td>
+                <td>@Convert.ToString(string.Format("{0:MM/dd/yyyy}", task.RequiredByDate))</td>
+                <td>
+                    <span>@Html.ActionLink("Details", "Details", new { id = task.Id })</span>
+                    <span>@Html.ActionLink("Edit", "Edit", new { id = task.Id })</span>
+                    <span>@Html.ActionLink("Delete", "Delete", new { id = task.Id }, null)</span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+﻿@model TaskManagementSystem.Models.CommentViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create comment</h2>
+
+ @*Create comment form*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.TaskId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Text)
+        @Html.TextAreaFor(model => model.Text, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Reminder date")
+        @Html.TextBoxFor(model => model.ReminderDate, new { @class = "form-control datepicker" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Type")
+        @Html.EnumDropDownListFor(model => model.CommentType, new { @class = "form-control" })
+    </div>
+    @Html.ValidationSummary();
+    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Details","Tasks",new {id = Model.TaskId })'">Back</button>
+}
+
+

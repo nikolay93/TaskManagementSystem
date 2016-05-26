@@ -1,0 +1,73 @@
+﻿@model TaskManagementSystem.Models.TaskDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Task details</h2>
+@Html.ActionLink(" Back to tasks", "Index", "Tasks")
+
+@*Displaying specific task*@
+@Html.AntiForgeryToken()
+<div class="well well-lg">
+    <div class="form-group">
+        @Html.Label("Task name: ")
+        @Html.DisplayFor(model => model.Task.TaskName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Description: ")
+        @Html.DisplayFor(model => model.Task.TaskDescription, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Next action date: ")
+        @Html.DisplayFor(model => model.Task.NextActionDate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Required by: ")
+        @Html.DisplayFor(model => model.Task.RequiredByDate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Type: ")
+        @Html.DisplayFor(model => model.Task.TaskType, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Status: ")
+        @Html.DisplayFor(model => model.Task.TaskStatus, new { @class = "form-control" })
+    </div>
+</div>
+@Html.ActionLink(" New comment", "Create", "Comments", new { id = Model.Task.Id }, null)<br />
+
+@*Displaying comments associated with specific task*@
+@foreach (var comment in Model.Comments)
+{
+
+    <div class="col-sm-1">
+        <div class="thumbnail">
+            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+        </div>
+    </div>
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>Created: @Convert.ToString(string.Format("{0:MM/dd/yyyy}", comment.DateAdded))</strong><br />
+                                @if (comment.ReminderDate == null)
+                                {
+                                    <strong>Reminder:No reminder</strong><br />
+                                }
+                                else
+                                {
+                                    <strong>Reminder: @Convert.ToString(string.Format("{0:MM/dd/yyyy}", comment.ReminderDate))</strong><br />
+                                }
+
+                                <span class="text-muted">
+                                    <span> @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.Id }, null) </span>
+                                    <span> @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.Id }, null)</span>
+                                </span>
+                            </div>
+                            <div class="panel-body">
+                                @comment.Text
+                            </div>
+                        </div>
+                    </div>
+}
+
+

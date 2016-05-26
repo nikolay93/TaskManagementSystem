@@ -1,0 +1,97 @@
+﻿@model List<TaskManagementModule.Comment>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search comments</h2>
+ @*Get Form for the comment search*@
+@using (Html.BeginForm("Search", "Comments", FormMethod.Get))
+{
+    @Html.Label("Search Criteria")
+    <select name="searchCriteria" id="Crd" class="form-control">
+        <option>Text</option>
+        <option>Date added</option>
+        <option>Reminder date</option>
+        <option>Type</option>
+    </select><br />
+    @Html.Label("Search Query")
+    <input name="searchQuery" id="query" class="form-control" /><br />
+    <input type="submit" value="Search" class="btn btn-primary" />
+}
+
+@*Display a list of comments according to the search results*@
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Comment</th>
+            <th>Type</th>
+            <th>Associated task</th>
+            <th>Created</th>
+            <th>Reminder date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in Model)
+        {
+            <tr>
+                <td>
+                    @comment.Text
+                </td>
+                <td>
+                    @comment.CommentType
+                </td>
+                <td>
+                    <span>@Html.ActionLink(comment.Task.TaskName, "Details", "Tasks", new { id = comment.TaskId }, null)</span>
+                </td>
+                <td>
+                    @Convert.ToString(string.Format("{0:MM/dd/yyyy}", comment.DateAdded))
+                </td>
+                <td>
+                    @if (comment.ReminderDate == null)
+                    {
+                        <strong>No reminder</strong>
+                    }
+                    else
+                    {
+                        @Convert.ToString(string.Format("{0:MM/dd/yyyy}", comment.ReminderDate))
+                    }
+                </td>
+                <td>
+                    <span>@Html.ActionLink("Edit", "Edit", new { id = comment.Id, returnPage = "Comments/Search" })</span>
+                    <span>@Html.ActionLink("Delete", "Delete", new { id = comment.Id, returnPage = "Comments/Search" })</span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*Script for change of the searchQuery input type*@
+<script>
+    $(document).ready(function () {
+        $('#Crd').change(function () {
+            var selectedVal = $(this).find("option:selected").text();
+            if (selectedVal === 'Date added' || selectedVal === 'Reminder date') {
+                $('.query').replaceWith('<input name="searchQuery" id="query" class="form-control" />');
+                $('#query').datepicker()
+
+            }
+            else if (selectedVal === 'Text') {
+                $('.query').replaceWith('<input name="searchQuery" id="query" class="form-control" />');
+                $('#query').datepicker("destroy");
+            }
+            else if (selectedVal === 'Type') {
+                $('#query').datepicker("destroy")
+                $('#query').hide();
+                $("#query").replaceWith('<select class="query form-control" name="searchQuery">' + '</select>');
+                @{var values = Enum.GetValues(typeof(TaskManagementModule.CommentType));
+                    foreach (var enumValue in values)
+                    {
+                       @: $('.query').append("<option>@enumValue</option>");
+                                    }
+            }
+            }
+        });
+    });
+</script>

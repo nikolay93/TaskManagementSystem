@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 14 for Web
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagementSystem", "TaskManagementSystem\TaskManagementSystem.csproj", "{8CA5367B-B070-443F-A082-3B4652E54BAF}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "TaskManagementService", "TaskManagementService\TaskManagementService.ccproj", "{70ACECE5-94EC-40C7-AE73-75B5D319CBA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagementModule", "TaskManagementModule\TaskManagementModule.csproj", "{7285E597-5089-46A3-8A78-13910153E9B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CA5367B-B070-443F-A082-3B4652E54BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA5367B-B070-443F-A082-3B4652E54BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA5367B-B070-443F-A082-3B4652E54BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA5367B-B070-443F-A082-3B4652E54BAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70ACECE5-94EC-40C7-AE73-75B5D319CBA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70ACECE5-94EC-40C7-AE73-75B5D319CBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70ACECE5-94EC-40C7-AE73-75B5D319CBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70ACECE5-94EC-40C7-AE73-75B5D319CBA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7285E597-5089-46A3-8A78-13910153E9B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7285E597-5089-46A3-8A78-13910153E9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7285E597-5089-46A3-8A78-13910153E9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7285E597-5089-46A3-8A78-13910153E9B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

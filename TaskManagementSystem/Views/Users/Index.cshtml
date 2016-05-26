@@ -1,0 +1,31 @@
+﻿@model List<TaskManagementModule.User>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users</h2>
+@Html.ActionLink("Create user", "Create")
+
+@*Displaying all users*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>
+                    <span>@Html.ActionLink("Edit", "Edit", new { id = user.Id })</span>
+                    <span>@Html.ActionLink("Delete", "Delete", new { id = user.Id }, null)</span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

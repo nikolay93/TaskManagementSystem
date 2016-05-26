@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="TaskManagementService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="TaskManagementSystem">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=nikolay;AccountKey=hRcuS6/xvd2Be5VygRmpWNYtMTw00joF7Vu2CFNLkRmP8UmtfY2eMNZ4XIKnncB/45IQ0H7qNngycTtqqnkrKw==" />
+      <Setting name="TaskManagementEntitiesContainer" value="metadata=res://*/TaskManagementEntities.csdl|res://*/TaskManagementEntities.ssdl|res://*/TaskManagementEntities.msl;provider=System.Data.SqlClient;provider connection string='Server=tcp:aarhuswebcorporation.database.windows.net,1433;Database=TaskManagementSystem;User ID=nikolay@aarhuswebcorporation;Password=Koko9339;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework'" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

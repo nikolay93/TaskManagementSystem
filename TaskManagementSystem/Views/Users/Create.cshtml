@@ -1,0 +1,26 @@
+﻿@model TaskManagementSystem.Models.UserViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create user</h2>
+
+@*Create user form*@
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken();
+<div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name,new  {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+    </div>
+    @Html.ValidationSummary()
+        <button type="submit" style="" class="btn btn-primary">Create</button>
+        <button type="button" class="btn btn-danger" style="" onclick="location.href='@Url.Action("Index","Users")'">Back</button>
+}
+            
+       
+    
