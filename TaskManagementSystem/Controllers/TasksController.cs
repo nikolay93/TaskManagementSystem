@@ -47,6 +47,7 @@ namespace TaskManagementSystem.Controllers
                     RequiredByDate = taskModel.RequiredByDate,
                     NextActionDate = taskModel.NextActionDate,
                     CreateDate = DateTime.Today
+                    
                 };
 
                 db.Tasks.Add(task);

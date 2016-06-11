@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TaskManagementService" generation="1" functional="0" release="0" Id="26b03321-839b-41ac-ba8c-050f3ac74ea8" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TaskManagementService" generation="1" functional="0" release="0" Id="24cc3bd0-e443-4b70-a896-c04f26988f9a" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="TaskManagementServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -81,9 +81,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="066a03eb-7d3c-4111-81da-b0c6a154a10c" ref="Microsoft.RedDog.Contract\ServiceContract\TaskManagementServiceContract@ServiceDefinition">
+    <implementation Id="c6afcbe6-c649-4e91-b192-8e74bf74a07b" ref="Microsoft.RedDog.Contract\ServiceContract\TaskManagementServiceContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="b5202718-d542-4c65-86a1-80434db6433f" ref="Microsoft.RedDog.Contract\Interface\TaskManagementSystem:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="2ed90ef6-0580-4887-b1ac-22bdea9f3aa2" ref="Microsoft.RedDog.Contract\Interface\TaskManagementSystem:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/TaskManagementService/TaskManagementServiceGroup/TaskManagementSystem:Endpoint1" />
           </inPort>
